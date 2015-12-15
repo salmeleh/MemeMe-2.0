@@ -42,10 +42,10 @@ class MemeCollectionViewController: UICollectionViewController {
         //determine which cell
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("MemeCollectionViewCell", forIndexPath: indexPath) as! MemeCollectionViewCell
         //determine the correct meme
-        let meme = memes[indexPath.item]
+        let selectedMeme = memes[indexPath.item]
         //set text and image
-        cell.setText(meme.topText, bottom: meme.bottomText)
-        cell.memeImageView? = UIImageView(image: meme.memedImage)
+        cell.setText(selectedMeme.topText, bottom: selectedMeme.bottomText)
+        cell.memeImageView.image = selectedMeme.memedImage
         
         return cell
     }

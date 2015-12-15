@@ -20,6 +20,8 @@ class MemeTableViewController: UIViewController, UITableViewDataSource, UITableV
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        tableView.delegate = self
+        tableView.dataSource = self
     }
     
     override func viewWillAppear(animated: Bool) {

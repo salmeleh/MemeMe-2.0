@@ -11,14 +11,14 @@ import UIKit
 
 class MemeCollectionViewCell: UICollectionViewCell {
     
-    @IBOutlet weak var memeImageView: UIImageView!
     @IBOutlet weak var topLabel: UILabel!
     @IBOutlet weak var bottomLabel: UILabel!
-    
+    @IBOutlet weak var memeImageView: UIImageView!
     
     func setText(top: String, bottom: String){
         topLabel.text = top
         bottomLabel.text = bottom
     }
+    
     
 }
