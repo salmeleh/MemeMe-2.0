@@ -19,6 +19,8 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     @IBOutlet weak var shareButton: UIBarButtonItem!
     @IBOutlet weak var cancelButton: UIBarButtonItem!
     
+    
+    
     //define text attirbutes to be used
     let memeTextAttributes = [
         NSStrokeColorAttributeName : UIColor.blackColor(),
@@ -30,6 +32,9 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        
+        topTextField.delegate = self
+        bottomTextField.delegate = self
         
         //assign attributes to both text fields
         topTextField.defaultTextAttributes = memeTextAttributes
@@ -60,9 +65,11 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
+        
+        subscribeToKeyboardNotifications()
+        
         //from camera button will be disabled for devies w/o camera
         fromCameraButton.enabled = UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.Camera)
-        subscribeToKeyboardNotifications()
         
         if imagePickerView.image == nil {
             shareButton.enabled = false
@@ -82,6 +89,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     }
     
     override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
         unsubscribeFromKeyboardNotifications()
     }
     
@@ -91,6 +99,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         // Dispose of any resources that can be recreated.
     }
     
+
     
     //when clicking the From Album button
     @IBAction func pickAnImageFromAlbum(sender: AnyObject) {
@@ -119,6 +128,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         return true
     }
     
+    
     //UIImagePickerControllerDelegate functions
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
         
@@ -137,6 +147,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     }
     
     
+//  //KEYBOARD METHODS//
     
     //subscribe to keyboard show/hide
     func subscribeToKeyboardNotifications() {
@@ -165,15 +176,17 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         return keyboardSize.CGRectValue().height
     }
     
+    func textFieldDidBeginEditing(textField: UITextField!) {
+        activeField = textField
+    }
+    
+    func textFieldDidEndEditing(textField: UITextField!) {
+        activeField = nil
+    }
+    
     
     
 //    //SAVING THE MEME//
-//    struct Meme {
-//        var topText: String
-//        var bottomText: String
-//        var originalImage: UIImage
-//        var memedImage: UIImage
-//    }
     
     func generateMemedImage() -> UIImage {
         // TODO: Hide toolbar and navbar
