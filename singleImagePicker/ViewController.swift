@@ -19,7 +19,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     @IBOutlet weak var shareButton: UIBarButtonItem!
     @IBOutlet weak var cancelButton: UIBarButtonItem!
     
-    
+    var activeTextField: UITextField!
     
     //define text attirbutes to be used
     let memeTextAttributes = [
@@ -32,9 +32,9 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        
-        topTextField.delegate = self
-        bottomTextField.delegate = self
+//        
+//        topTextField.delegate = self
+//        bottomTextField.delegate = self
         
         //assign attributes to both text fields
         topTextField.defaultTextAttributes = memeTextAttributes
@@ -120,6 +120,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     //When a user taps inside a textfield, the default text should clear.
     func textFieldDidBeginEditing(textField: UITextField) -> Bool {
         textField.text = ""
+        activeTextField = textField
         return true
     }
     
@@ -163,7 +164,16 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     
     //move frame with keyboard show/hide
     func keyboardWillShow(notification: NSNotification) {
-        view.frame.origin.y -= getKeyboardHeight(notification)
+        var aRect: CGRect = self.view.frame
+        aRect.size.height -= getKeyboardHeight(notification)
+        let activeTextFieldRect: CGRect? = activeTextField?.frame
+        let activeTextFieldOrigin: CGPoint? = activeTextFieldRect?.origin
+        
+        if (!CGRectContainsPoint(aRect, activeTextFieldOrigin!)) {
+            view.frame.origin.y -= getKeyboardHeight(notification)
+        }
+        
+//        view.frame.origin.y -= getKeyboardHeight(notification)
     }
     func keyboardWillHide(notification: NSNotification){
         view.frame.origin.y += getKeyboardHeight(notification)
@@ -174,14 +184,6 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         let userInfo = notification.userInfo
         let keyboardSize = userInfo![UIKeyboardFrameEndUserInfoKey] as! NSValue // of CGRect
         return keyboardSize.CGRectValue().height
-    }
-    
-    func textFieldDidBeginEditing(textField: UITextField!) {
-        activeField = textField
-    }
-    
-    func textFieldDidEndEditing(textField: UITextField!) {
-        activeField = nil
     }
     
     
