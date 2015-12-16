@@ -44,8 +44,8 @@ class MemeCollectionViewController: UICollectionViewController {
         //determine the correct meme
         let selectedMeme = memes[indexPath.item]
         //set text and image
-        cell.setText(selectedMeme.topText, bottom: selectedMeme.bottomText)
-        cell.memeImageView.image = selectedMeme.memedImage
+        //cell.setText(selectedMeme.topText, bottom: selectedMeme.bottomText)
+        cell.memeImageView?.image = selectedMeme.memedImage
         
         return cell
     }
