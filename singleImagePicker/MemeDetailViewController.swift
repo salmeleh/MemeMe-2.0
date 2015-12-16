@@ -15,15 +15,15 @@ class MemeDetailViewController: UIViewController {
     
     @IBOutlet weak var imageView: UIImageView!
     
-    @IBOutlet weak var topLabel: UILabel!
-    @IBOutlet weak var bottomLabel: UILabel!
+    //@IBOutlet weak var topLabel: UILabel!
+    //@IBOutlet weak var bottomLabel: UILabel!
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         self.imageView!.image = meme.memedImage
         
-        self.topLabel!.text = meme.topText
-        self.bottomLabel!.text = meme.bottomText
+        //self.topLabel.text = meme.topText
+        //self.bottomLabel.text = meme.bottomText
         
     }
     
