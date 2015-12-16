@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate {
 
     @IBOutlet weak var imagePickerView: UIImageView!
     @IBOutlet weak var fromAlbumButton: UIBarButtonItem!
@@ -19,7 +19,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     @IBOutlet weak var shareButton: UIBarButtonItem!
     @IBOutlet weak var cancelButton: UIBarButtonItem!
     
-    var activeTextField: UITextField!
+    var activeTextField = UITextField()
     
     //define text attirbutes to be used
     let memeTextAttributes = [
@@ -32,9 +32,9 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-//        
-//        topTextField.delegate = self
-//        bottomTextField.delegate = self
+        
+        topTextField.delegate = self
+        bottomTextField.delegate = self
         
         //assign attributes to both text fields
         topTextField.defaultTextAttributes = memeTextAttributes
@@ -53,9 +53,9 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         imagePickerView.contentMode = .ScaleAspectFit
         
         
-        //disable the share button until imageview has an image
-        //shareButton.enabled = false
-        //shareButton.hidden = true
+        topTextField.tag = 0
+        bottomTextField.tag = 1
+        
     }
     
     func dismissKeyboard() {
@@ -118,10 +118,10 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     }
     
     //When a user taps inside a textfield, the default text should clear.
-    func textFieldDidBeginEditing(textField: UITextField) -> Bool {
+    func textFieldDidBeginEditing(textField: UITextField) {
         textField.text = ""
-        activeTextField = textField
-        return true
+        self.activeTextField.tag = textField.tag
+        print(activeTextField.tag)
     }
     
     //When a user presses return, the keyboard should be dismissed
@@ -164,19 +164,16 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     
     //move frame with keyboard show/hide
     func keyboardWillShow(notification: NSNotification) {
-        var aRect: CGRect = self.view.frame
-        aRect.size.height -= getKeyboardHeight(notification)
-        let activeTextFieldRect: CGRect? = activeTextField?.frame
-        let activeTextFieldOrigin: CGPoint? = activeTextFieldRect?.origin
-        
-        if (!CGRectContainsPoint(aRect, activeTextFieldOrigin!)) {
+        if(activeTextField.tag == 1){
             view.frame.origin.y -= getKeyboardHeight(notification)
         }
-        
-//        view.frame.origin.y -= getKeyboardHeight(notification)
     }
+    
+    
     func keyboardWillHide(notification: NSNotification){
-        view.frame.origin.y += getKeyboardHeight(notification)
+        if(activeTextField.tag == 1){
+            view.frame.origin.y -= getKeyboardHeight(notification)
+        }
     }
     
     
