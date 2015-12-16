@@ -115,15 +115,10 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="bGP-td-vXy">
-                        <barButtonItem key="rightBarButtonItem" style="plain" id="9pF-sR-W03">
-                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="lJF-3i-vdR">
-                                <rect key="frame" x="447" y="7" width="133" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="New"/>
-                                <connections>
-                                    <segue destination="suC-SY-Gcd" kind="show" id="qea-Z1-mE7"/>
-                                </connections>
-                            </button>
+                        <barButtonItem key="rightBarButtonItem" title="New" id="XeI-cD-Wug">
+                            <connections>
+                                <segue destination="suC-SY-Gcd" kind="show" id="hu6-QV-wmc"/>
+                            </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
@@ -180,15 +175,10 @@
                         </connections>
                     </collectionView>
                     <navigationItem key="navigationItem" id="4cp-6k-pyM">
-                        <barButtonItem key="rightBarButtonItem" style="plain" id="BSn-G6-Exe">
-                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="r8C-tq-k9d">
-                                <rect key="frame" x="447" y="7" width="133" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="New"/>
-                                <connections>
-                                    <segue destination="suC-SY-Gcd" kind="show" id="AjG-dI-URk"/>
-                                </connections>
-                            </button>
+                        <barButtonItem key="rightBarButtonItem" title="New" id="BLS-KA-Ps2">
+                            <connections>
+                                <segue destination="suC-SY-Gcd" kind="show" id="EOw-tO-vqE"/>
+                            </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
@@ -377,6 +367,6 @@
         <image name="table" width="30" height="30"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="AjG-dI-URk"/>
+        <segue reference="EOw-tO-vqE"/>
     </inferredMetricsTieBreakers>
 </document>
